@@ -1,4 +1,11 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+/* eslint-disable react/prop-types */
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import Login from "./components/auth/Login";
@@ -14,12 +21,11 @@ import Dashboard from "./components/Dashboard";
 function App() {
   const [user, setUser] = useState(null);
   const [isOnboardingCompleted, setIsOnboardingCompleted] = useState(null);
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
-      // console.log(user + " user");
       if (user) {
-        // console.log(user.uid + " user.uid");
         checkOnboardingStatus(user.uid);
       }
     });
@@ -34,15 +40,12 @@ function App() {
         try {
           if (snapshot.exists()) {
             const userData = snapshot.val();
-            setIsOnboardingCompleted(userData?.isOnboardingCompleted); //
+            setIsOnboardingCompleted(userData?.isOnboardingCompleted);
           } else {
-            // console.log("No data found for user:", userId);
             setIsOnboardingCompleted(false);
-            // Handle the case where data for the user doesn't exist
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
-          // Handle error gracefully
         }
       });
     } catch (error) {
@@ -52,7 +55,27 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar user={user} setIsOnboardingCompleted={setIsOnboardingCompleted} />
+      <Content
+        user={user}
+        setIsOnboardingCompleted={setIsOnboardingCompleted}
+        isOnboardingCompleted={isOnboardingCompleted}
+      />
+    </BrowserRouter>
+  );
+}
+
+const Content = ({ user, setIsOnboardingCompleted, isOnboardingCompleted }) => {
+  const location = useLocation();
+  const showNavbarFooter = !["/login", "/signup"].includes(location.pathname);
+
+  return (
+    <>
+      {showNavbarFooter && (
+        <Navbar
+          user={user}
+          setIsOnboardingCompleted={setIsOnboardingCompleted}
+        />
+      )}
       <Routes>
         <Route
           path="/"
@@ -93,9 +116,9 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
-    </BrowserRouter>
+      {showNavbarFooter && <Footer />}
+    </>
   );
-}
+};
 
 export default App;
