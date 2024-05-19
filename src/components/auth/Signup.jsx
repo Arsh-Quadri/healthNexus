@@ -50,13 +50,21 @@ const Signup = ({ isOnboardingCompleted }) => {
     }
   };
   return (
-    <div className=" w-full flex flex-col justify-center items-center relative bckimg ">
-      <div className="w-full sm:w-[65%] md:w-[40%] lg:w-[34%] bg-[#23323d] shadow-none sm:shadow-lg shadow-black relative mt-0 mb-0 sm:mt-8 sm:mb-12 flex flex-col justify-center p-5 px-10 rounded-none sm:rounded-xl z-20 ">
-        <h1 className="text-3xl font-[750] text-[#F5C754] relative py-5 left-0 text-left">
+    <div className="w-[90%] max-h-fit relative overflow-hidden h-[80%] mt-[1.7rem] bg-gray-100 mx-auto px-5  flex justify-center items-center  shadow-xl"> 
+    {/* Image */}
+    <div className="w-[50%] z-20"> 
+      <img src="/src/assets/nurse.png" className="w-[70%] mx-auto " alt="Logo" />
+    </div>
+      <div className="shadow-xl absolute rounded-[25%] right-[55%] bottom-0 bg-[#2FCAB1] w-[40%] h-[74%] z-10"> </div>
+      {/* Login */}
+
+    <div className="w-[50%] mt-10 flex flex-col justify-center items-center  bckimg">
+      <div className="w-[70%] bg-[#fff] shadow-none sm:shadow-lg shadow-black relative flex flex-col justify-center p-5 px-10 rounded-none sm:rounded-xl z-20  ">
+        <h1 className="text-3xl font-[750] text-black relative py-5 left-0 text-left">
           Create an account
         </h1>
         <div className="mt-3">
-          <h1 className="text-md font-[600] relative text-[#E5E8EB]  left-0 text-left mb-1">
+          <h1 className="text-md font-[600] relative text-[#2FCAB1] left-0 text-left mb-1">
             Email address
           </h1>
           <input
@@ -70,7 +78,7 @@ const Signup = ({ isOnboardingCompleted }) => {
           />
         </div>
         <div className="mt-3">
-          <h1 className="text-md font-[600] relative  left-0 text-left text-[#E5E8EB]">
+          <h1 className="text-md font-[600] relative  left-0 text-left text-[#2FCAB1]">
             Password
           </h1>
           <input
@@ -85,7 +93,7 @@ const Signup = ({ isOnboardingCompleted }) => {
         </div>
         <button
           onClick={(e) => handleSubmit(e)}
-          className="bg-[#F5C754] hover:bg-[#ddb348] font-[600] px-4 py-2 rounded-xl cursor-pointer  md:block text-center mt-5"
+          className="bg-[#80f4d7] hover:bg-[#94f1da] font-[600] px-4 py-2 rounded-xl cursor-pointer  md:block text-center mt-5"
         >
           Sign Up
         </button>
@@ -96,7 +104,7 @@ const Signup = ({ isOnboardingCompleted }) => {
           <img src={google} alt="" />
           <div>Continue with Google</div>
         </div>
-        <h1 className="text-sm text-slate-200 font-[500] relative  left-0 text-center py-3 ">
+        <h1 className="text-sm text-[#2FCAB1] font-[500] relative  left-0 text-center py-3 ">
           Already have an account?
         </h1>
         <Link
@@ -106,6 +114,7 @@ const Signup = ({ isOnboardingCompleted }) => {
           <div>Log in</div>
         </Link>
       </div>
+    </div>
     </div>
   );
 };
